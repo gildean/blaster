@@ -1,69 +1,79 @@
-var http = require('http');
-var url = require('url');
-var getaddress = process.argv[2] || 'http://localhost';
-var times = process.argv[3] || 1;
-var blastercaliber = process.argv[4] || 99;
+var http = require('http')
+  , url = require('url')
+  , getaddress = process.argv[2] || 'http://localhost'
+  , times = process.argv[3] || 100
+  , blastercaliber = process.argv[4] || 100
+  , reset = '\x1B[0m'
+  , bold = '\x1B[1m'
+  , red = '\x1B[31m'
+  , green = '\x1B[32m'
+  , cyan = '\x1B[36m'
+  , blue = '\x1B[34m'
+  , white = '\x1B[37m'
+  , options = {
+      host: url.parse(getaddress).hostname,
+      port: url.parse(getaddress).port,
+      path: url.parse(getaddress).path,
+    };
+
+// caliber sets the max sockets used for pooling requests
 http.globalAgent.maxSockets = blastercaliber;
-var options = {
-  host: url.parse(getaddress).hostname,
-  port: url.parse(getaddress).port,
-  path: url.parse(getaddress).path,
-};
-
-var reset, bold, red, green, cyan, blue, white;
-reset = '\x1B[0m';
-bold = '\x1B[1m';
-red = '\x1B[31m';
-green = '\x1B[32m';
-cyan = '\x1B[36m';
-blue = '\x1B[34m';
-white = '\x1B[37m';
 
 
-var startTime = Date.now();
-console.log('\r\n\r\n'+ bold +' ,___  _    ____ ____ ___ ____ ____ ');
-console.log(' ||__] |    |__| [__   |  |___ |__/');
-console.log(' ||__] |___ |  | ___]  |  |___ |  \\ ');
-console.log('  ' + cyan + '.\'.     .-.     .-.     .-.     .-.');
-console.log(white + '01001' + blue + '\\' + white + '01001o0' + blue + '\\' + white + 'o01001o' + blue + '\\' + white + '1o01001' + blue + '\\' + white + '01001o0' + blue + '\\');
-console.log(cyan + '\'     `-\'     `-\'     `-\'     `-\'');
-console.log('}>=<{ Target : '+ white + options.host + cyan + ' }');
-console.log(cyan + '}>=<{ Ammo   : '+ white + times + cyan + ' }');
-console.log(cyan + '}>=<{ Caliber: '+ white + blastercaliber + cyan + ' }');
-console.log('  ' + cyan + '.\'.     .-.     .-.     .-.     .-.');
-console.log(white + '01001' + blue + '\\' + white + '01001o0' + blue + '\\' + white + 'o01001o' + blue + '\\' + white + '1o01001' + blue + '\\' + white + '01001o0' + blue + '\\');
-console.log(cyan + '\'     `-\'     `-\'     `-\'     `-\'');
-process.stdout.write(cyan + '\r\n\r\n}>=<{ ' + white + 'Charging \x1B[s');
+// some cool ascii-art
+console.log('\r\n\r\n'+ bold +' ,___  ,_    ,____ ,____ ,____, ,____ ,____ ');
+console.log(' ||__] ||    ||__| |[__    ||   ||___ ||__/');
+console.log(' ||__] ||___ ||  | ___|]   ||   ||___ ||  \\ ');
+console.log('  ' + cyan + '.\'.     .-.     .-.     .-.     .-.     .-.');
+console.log(white + '01001' + blue + '\\' + white + '01001o0' + blue + '\\' + white + 'o01001o' + blue + '\\' + white + '1o01001' + blue + '\\' + white + '01001o0' + blue + '\\' + white + '01001o0' + blue + '\\');
+console.log(cyan + '\'     `-\'     `-\'     `-\'     `-\'     `-\'');
+console.log(reset + cyan + '}>=<{' + bold + '  Target   ' + reset + cyan +  '}>=<{' + white + ': ' + bold + options.host);
+console.log(reset + cyan + '}>=<{' + bold + '  Ammo     ' + reset + cyan +  '}>=<{' + white + ': ' + bold + times);
+console.log(reset + cyan + '}>=<{' + bold + '  Caliber  ' + reset + cyan +  '}>=<{' + white + ': ' + bold + blastercaliber);
+console.log(cyan + '-.     .-.     .-.     .-.     .-.     .-.');
+console.log(white + 'o0' + blue + '\\' + white + 'o01001o' + blue + '\\' + white + '1o01001' + blue + '\\' + white + '01001o0' + blue + '\\' + white + '01001o0' + blue + '\\'+ white + '01001o0'+ blue + '\\'+ white + '01o');
+console.log(cyan + '   `-\'     `-\'     `-\'     `-\'     `-\'     `-\'');
 
 
-function blaster(i) {
-  
-  var req = http.get(options, function(res) {
-    if (i==times){
-      function ok() {
-        console.log(cyan + '\r\n\r\n\r\n\r\n}>=<{ ' + white + 'Blasting lasted ' + cyan + '}>=<{ ' + green + ((endTime - startTime)/1000) + ' s');
-        console.log(cyan + '}>=<{ ' + white + 'OK!\r\n\r\n');
-      };
-      var endTime = Date.now();
-      setTimeout(ok, (blastercaliber*15));
-    }
-    if (i%100===0) {
-      process.stdout.write(cyan + '}>=<{ ' + white + 'Server returns fire ' + cyan + '}>=<{ ' + green + 'STATUS ' + res.statusCode + '\r');
-    }
-  }).on('error', function(e) {
-    console.log(red + '\r\n}>=<{ Critical hit: ' + white + e.message + '\r\n');
-  });
+// print out the message for the first tick loop and save cursor location
+process.stdout.write(reset + cyan + '\r\n\r\n}>=<{ ' + white + bold + ' Charging cells   \x1B[s');
 
-  process.stdout.write(cyan + '\x1B[u}>=<{ ' + reset + i + bold + ' / ' + reset + times + bold + ' cells' + cyan + '\r');
-
-};
-
-
-console.time('\r\n}>=<{ ' + white + 'Charging time ' + cyan + '}>=<{' + green);
-for (i=1;i<=times;i++) {
+// mark the first tick loop start time
+console.time(reset + cyan + '\r\n}>=<{ ' + white + bold + ' Charging time    ' + reset + cyan + '}>=<{' + green + bold);
+// print out the counter on the first tick marking pooling of the connections
+// fire the requests on the second tick
+for (var i=1;i<=times;i++) {
+  process.stdout.write(reset + cyan + '\x1B[u}>=<{' + white + ': ' + ((i/times)*100).toFixed(1) + ' %\r');
   blaster(i);
 };
-console.timeEnd('\r\n}>=<{ ' + white + 'Charging time ' + cyan + '}>=<{' + green);
+// mark the end of the first tick loop
+console.timeEnd(reset + cyan + '\r\n}>=<{ ' + white + bold + ' Charging time    ' + reset + cyan + '}>=<{' + green + bold);
 
+// the request function wrapped in a closure
+function blaster(i) {
+  // pick up the saved cursor position and show the counter on first tick loop
+  // the request which returns callback on second tick loop
+  http.get(options, function(res) {
+    if (i==times) {
+      process.nextTick(endmessage);
+    }
+    // print out all error messaages  
+  }).on('error', function(e) {
+    console.log(reset + cyan + '\r\n}>=<{ ' + red + bold +  ' Critical hit    ' + reset + cyan + '}>=<{' + reset + ': ' + white + bold + e.message + '\r\n');
+  });
 
-process.stdout.write(cyan + '\r\n\r\n}>=<{ ' +  white + 'Fully charged! ' + cyan + '}>=<{ ' + red + 'Fire!\r\n\r\n');
+};
+
+// ending message
+function endmessage() {
+  // mark the end of blasting
+  var endTime = Date.now();
+  console.log(reset + cyan + '\r\n\r\n\r\n\r\n}>=<{ ' + white + bold + ' Blasting lasted  ' + reset + cyan + '}>=<{' + reset + ': ' + green + bold + ((endTime - startTime)/1000).toFixed(1) + ' s');
+  console.log(reset + cyan + '\r\n}>=<{ ' + white + bold + ' Ceasefire        ' + reset + cyan + '}>=<{\r\n\r\n' + reset);
+};
+
+// print out a message when pooling is done and firing will commence
+process.stdout.write(reset + cyan + '\r\n\r\n}>=<{ ' +  white + bold + ' Fully charged!   ' + reset + cyan + '}>=<{' + reset + ': ' + red + bold + 'Fire!\r\n\r\n');
+
+// mark the start of blasting
+var startTime = Date.now();

@@ -1,13 +1,16 @@
 BLASTER
 =======
 
-Blast http-servers with requests.
+Node.js cli-app for blasting http-servers with requests.
+
 
 Usage:
 ------
 `node blaster http://someurl ammo caliber`
 
-url defaults to localhost, ammo defaults to 1 and caliber defaults to 99.
+url defaults to localhost, ammo defaults and caliber default to 100.
+
+(ammo = number of requests, caliber = max sockets used)
 
 Credits:
 --------
@@ -17,4 +20,4 @@ Disclaimer:
 -----------
 I'm not responsible for the damage you might cause with blaster.
 
-__Blast with care.__
+_Blast with care._
