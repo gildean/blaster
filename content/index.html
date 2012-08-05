@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>blaster</title>
+    <link rel="stylesheet" href="style.css">  
+    <script src="js/jquery.js"></script>
+  </head>
+  <body>
+    <div id="container">
+  <header>
+  	<h1>blaster</h1>
+  </header>
+  	<div id="blastingbox">
+    <form action="/" method="POST" id="blaster-form">
+      <input id="target" name="target" type="text" placeholder="URL"/>
+      <input id="ammo" name="ammo" type="number" placeholder="ammo"/>
+      <input id="caliber" name="caliber" type="number" placeholder="caliber"/>
+      <button type="submit" class="button">blast</button>
+    </form>
+    <label id="info-target">
+    <span></span></label>
+  	</div>
+  	<div id="resultsbox">
+      <p id="placeholder">results will appear here</span>
+    </div>
+  </div>
+  </body>
+</html>

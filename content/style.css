@@ -1,0 +1,103 @@
+
+* {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Ubuntu mono", monospace;
+	text-shadow: -0.1em -0.1em 0 rgba(0,0,0,0.04);
+}
+
+body {
+	width: 100%;
+	font-size: 120%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: transparent;
+}
+
+header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 40px;
+	background: #0e0e0e;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+	padding: 5px 0;
+	text-align: left;
+}
+
+h1 {
+	font-size: 36px;
+	color: #FFF;
+	text-shadow: -12px 0 0px #FF3380,-24px 0 0px #921D42, -36px 0 0px #4D061C;
+	padding: 0 0 0 8%;
+}
+
+h2 {
+	font-size: 20px;
+	color: #0e0e0e;
+	text-shadow: -2px 0 0px #FF3380
+}
+
+input {
+	margin: 20px 0;
+	width: 75%;
+	padding: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.button {
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+	border: 1px solid rgba(0,0,0,0.1);
+	margin: 7%;
+	width: 50%;
+	padding: 5px;
+}
+
+.button:hover {
+	box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+	cursor: pointer;
+}
+
+p {
+	font-size: .9em;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+#container {
+	position: relative;
+	margin: 50px 0 0 0;
+	padding: 0;
+}
+
+#blastingbox, #resultsbox {
+	width: 50%;
+	margin: 0;
+	padding: 0;
+}
+
+#blastingbox {
+	position: fixed;
+	left: 0;
+	top: 100px;
+}
+
+#resultsbox {
+float: right;
+height: 430px;
+min-height: 430px;
+overflow-y: auto;
+}
+
+#resultsbox p {
+	margin: 1% 0;
+}
+
+#placeholder {
+	padding: 160px 0;
+	color: rgba(0,0,0,0.2);
+}
