@@ -7,9 +7,10 @@ app.serveFilesFrom(__dirname + '/content');
 
 
 var window = app.createWindow({
+  alpha: false,
   width: 800,
   height: 480,
-  resizable: true,
+  resizable: false,
   disableSecurity: true,
   icons: __dirname + '/content/icons'
 });
@@ -97,7 +98,10 @@ window.on('ready', function(){
   function blastedOut(blastTime){
     $label.text('Ceasefire called');
     $buttons.attr('disabled', false);
-    $footerlabel.text('Blasting lasted: ' + blastTime.toFixed(1) + ' s');
+    var blasttimer = function(blastTime) {
+      $footerlabel.text('Blasting lasted: ' + blastTime.toFixed(1) + ' s');
+    };
+    setTimeout(blasttimer(blastTime), 1000);
   };
 
 });

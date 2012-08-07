@@ -10,7 +10,7 @@
 
 body {
 	width: 100%;
-	font-size: 120%;
+	font-size: 16px;
 	text-align: center;
 	margin: 0;
 	padding: 0;
@@ -38,7 +38,7 @@ h1 {
 
 h2 {
 	font-size: 20px;
-	color: #0e0e0e;
+	color: #FFF;
 	text-shadow: -2px 0 0px #FF3380;
 	padding: 10px 0;
 }
@@ -53,7 +53,7 @@ input {
 .bton {
 	color: #fff;
 	background-color: #0e0e0e;
-	box-shadow: inset 0 0 2px #FF3380;
+	box-shadow: -2px 2px 0px #921D42;
 	border: 1px solid rgba(0,0,0,0.1);
 	margin: 7%;
 	width: 40%;
@@ -65,7 +65,8 @@ input {
 }
 
 .bton:hover {
-	box-shadow: inset 0 0 100px #FF3380;
+	-webkit-transform: scale(0.95);
+	box-shadow: -1px 1px 1px #921D42, inset 0 0 100px #FF3380;
 	cursor: pointer;
 }
 
@@ -76,8 +77,9 @@ p {
 
 #container {
 	position: relative;
-	margin: 50px 0 0 0;
+	margin: 50px 0 30px 0;
 	padding: 0;
+
 }
 
 #blastingbox, #resultsbox {
@@ -86,22 +88,30 @@ p {
 	padding: 0;
 }
 
+#info-target {
+	background: rgb(0,0,0,0.5);
+	color: #fff;
+	border-radius: 1em;
+}
+
 #blastingbox {
 	position: fixed;
 	left: 0;
-	top: 100px;
-	padding:0 0 80px;
+	top: 80px;
 }
 
 #resultsbox {
 	float: right;
-	min-height: 400px;
-	height: 400px;
+	min-height: 360px;
+	height: 75vh;
 	overflow-y: auto;
+	background: rgba(0,0,0,0.9);
+	margin: 0 0 50px 0;
 }
 
 #resultsbox p {
 	margin: 1% 0;
+	color: #FFF;
 }
 
 #placeholder {
