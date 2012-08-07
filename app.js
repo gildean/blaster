@@ -32,6 +32,7 @@ window.on('ready', function(){
       window.frame.openDevTools();
     }
   });
+  
   var document = window.document;
   var $ = this.$,
       $target = $('input[name=target]'),

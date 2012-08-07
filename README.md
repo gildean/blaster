@@ -7,6 +7,7 @@ Cli and gui both included.
 
 Gui-version made with [appjs](https://github.com/appjs/appjs) , so node-gyp is required (for gui only).
 
+
 Usage:
 ------
 cli:
@@ -27,9 +28,11 @@ Url defaults to localhost, ammo and caliber default to 100.
 
 (ammo = number of requests, caliber = max sockets used)
 
+
 Credits:
 --------
 Inspiration from Killswitch's [joker.js](https://github.com/killswitch/joker.js)
+
 
 Disclaimer:
 -----------

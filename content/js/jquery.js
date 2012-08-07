@@ -7264,7 +7264,7 @@ jQuery.extend({
 
 	// Creates a full fledged settings object into target
 	// with both ajaxSettings and settings fields.
-	// If target is omitted, writes into ajaxSettings.
+	// If target is omited, writes into ajaxSettings.
 	ajaxSetup: function( target, settings ) {
 		if ( settings ) {
 			// Building a settings object

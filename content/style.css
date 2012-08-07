@@ -60,8 +60,8 @@ input {
 	padding: 10px 0;
 	border-radius: 0.5em;
 	font-size: 1.2em;
-	transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
+	transition: all .3s ease-in-out;
+	-webkit-transition: all .3s ease-in-out;
 }
 
 .button:hover {
