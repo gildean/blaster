@@ -42,13 +42,17 @@ window.on('ready', function(){
       $label = $info.find('span'),
       $buttons = $('input, button'),
       $results = $('#resultsbox'),
+      $placeholder = $('#placeholder'),
       $footer = $('#footer'),
-      $footerlabel = $footer.find('span');
+      $footerlabel = $footer.find('span'),
+      $error = $('#error'),
+      $errorlabel = $error.find('span');
   $label.text('Select target and blast!');
   $footerlabel.text('blaster by: ok 2012');
  
   $('#blaster-form').submit(function(e){
     e.preventDefault();
+    $placeholder.css('display', 'none');
     $label.text('Blasting!');
     $buttons.attr('disabled', true);
     var target = $target.val() || 'http://localhost',
@@ -60,9 +64,7 @@ window.on('ready', function(){
       port: url.parse(target).port,
       path: url.parse(target).path
     };
-    var Data={};
-    var Status=new Array(); 
-    Status.push('<h2>Blasted: ' + target + ' ' + ammo + ' times</h2>');
+    $('<h2>Blasted: ' + target + ' ' + ammo + ' times</h2>').appendTo($results);
     var startTime = Date.now();
   
     for(var i = 1; i <= ammo; i++) {
@@ -72,36 +74,30 @@ window.on('ready', function(){
     function blaster(i) {
       var req = http.get(options, function(res) {
         if (i%100===0) {
-          Status.push('Request: ' + i + ' STATUS: ' + res.statusCode);
+          $('<p>Request: ' + i + ' STATUS: ' + res.statusCode + '</p>').appendTo($results);
+          $footerlabel.text('Blasting: ' + ((i/ammo)*100).toFixed(1) + ' %');
         }
         if (i == ammo) {
           var endTime = Date.now();
           var blastTime = (endTime - startTime)/1000;
-          $footerlabel.text('Blasting lasted: ' + blastTime.toFixed(1) + ' s');
-          Data=JSON.stringify(Status);
-          Data=eval(Data).join(",")
-          Data= Data.replace(/,/g,'<p>');
-          blastedOut(Data);
+          blastedOut(blastTime);
         }
       }).on('error', function(e) {
-        Status.push('Request: ' + i + ' ERROR: ' +  e.message);
+        $('<p>Request: ' + i + ' ERROR: ' + e.message + '</p>').appendTo($results);
         if (i == ammo) {
           var endTime = Date.now();
           var blastTime = (endTime - startTime)/1000;
-          $footerlabel.text('ERROR! ERROR! ERROR!');
-          Data=JSON.stringify(Status);
-          Data=eval(Data).join(",")
-          Data= Data.replace(/,/g,'<p>');
-          blastedOut(Data, blastTime);
+          $errorlabel.text('ERROR! ERROR! ERROR!');
+          blastedOut(blastTime);
         }
       });
     };
   });
 
-  function blastedOut(Data){
+  function blastedOut(blastTime){
     $label.text('Ceasefire called');
-    $results.html(Data);
     $buttons.attr('disabled', false);
+    $footerlabel.text('Blasting lasted: ' + blastTime.toFixed(1) + ' s');
   };
 
 });

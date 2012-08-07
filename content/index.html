@@ -9,13 +9,19 @@
     <div id="container">
   <header>
   	<h1>blaster</h1>
+    <button id="delbutton" class="bton">clear</button>
+        <script>
+          $("#delbutton").click(function () {
+            $("#resultsbox").empty();
+          });
+        </script>
   </header>
   	<div id="blastingbox">
     <form action="/" method="POST" id="blaster-form">
       <input id="target" name="target" type="text" placeholder="URL"/>
       <input id="ammo" name="ammo" type="number" placeholder="ammo"/>
       <input id="caliber" name="caliber" type="number" placeholder="caliber"/>
-      <button type="submit" class="button">blast</button>
+      <button type="submit" class="bton">blast</button>
     </form>
     <label id="info-target">
       <span></span>
@@ -26,6 +32,9 @@
       <p id="results"></p>
     </div>
     <footer>
+      <label id="error">
+        <span></span>
+      </label>
       <label id="footer">
         <span></span>
       </label>
