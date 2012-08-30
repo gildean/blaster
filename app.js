@@ -68,7 +68,7 @@ window.on('ready', function(){
     $('<h2>Blasted: ' + target + ' ' + ammo + ' times</h2>').appendTo($results);
     var startTime = Date.now();
   
-    for(var i = 1; i <= ammo; i++) {
+    for(var i = 1; i <= ammo; i += 1) {
       blaster(i);
     };
 
